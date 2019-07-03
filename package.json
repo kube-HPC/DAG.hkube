@@ -2,9 +2,13 @@
   "name": "dag.hkube",
   "version": "1.0.0",
   "description": "handle the pipline flow",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "./node_modules/eslint/bin/eslint.js .",
+    "test": "NODE_ENV=test ./node_modules/mocha/bin/_mocha tests --colors --recursive --exit",
+    "test:cov": "NODE_ENV=test ./node_modules/nyc/bin/nyc.js --exclude=bootstrap.js --reporter=html --reporter=text --reporter=lcov mocha tests --colors --recursive --exit",
+    "coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "build": "npm publish"
   },
   "keywords": [
     "hkube"
@@ -13,14 +17,24 @@
   "license": "MIT",
   "dependencies": {
     "@hkube/parsers": "^1.0.20",
-    "chai": "^4.2.0",
-    "chai-as-promised": "^7.1.1",
-    "clone": "^2.1.2",
     "deep-extend": "^0.6.0",
     "graphlib": "^2.1.7",
     "lodash.groupby": "^4.6.0",
     "lodash.merge": "^4.6.1",
-    "sinon": "^7.3.2",
     "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "clone": "^2.1.2",
+    "coveralls": "^3.0.3",
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-chai-friendly": "^0.4.1",
+    "eslint-plugin-import": "^2.16.0",
+    "mocha": "^6.0.2",
+    "nyc": "^14.1.1",
+    "pre-commit": "^1.2.2",
+    "sinon": "^7.3.2"
   }
 }
