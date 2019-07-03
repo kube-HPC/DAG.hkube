@@ -1,0 +1,26 @@
+{
+  "name": "dag.hkube",
+  "version": "1.0.0",
+  "description": "handle the pipline flow",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "hkube"
+  ],
+  "author": "maty zisserman",
+  "license": "MIT",
+  "dependencies": {
+    "@hkube/parsers": "^1.0.20",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "clone": "^2.1.2",
+    "deep-extend": "^0.6.0",
+    "graphlib": "^2.1.7",
+    "lodash.groupby": "^4.6.0",
+    "lodash.merge": "^4.6.1",
+    "sinon": "^7.3.2",
+    "uuid": "^3.3.2"
+  }
+}
