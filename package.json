@@ -1,7 +1,7 @@
 {
   "name": "@hkube/dag",
   "version": "1.0.3",
-  "description": "handle the pipline flow",
+  "description": "handle the pipeline flow",
   "main": "index.js",
   "scripts": {
     "lint": "./node_modules/eslint/bin/eslint.js .",
@@ -13,7 +13,7 @@
   "keywords": [
     "hkube"
   ],
-  "author": "maty zisserman",
+  "author": "Hkube",
   "license": "MIT",
   "dependencies": {
     "@hkube/parsers": "^1.0.20",
