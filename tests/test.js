@@ -32,6 +32,46 @@ describe('NodesMap', () => {
 			const node = nodesMap.getNode('not_exists');
 			expect(node).to.be.undefined;
 		});
+		it('_addLevels: should add levels to graph 1', () => {
+			const pipeline = pipelines.find(p => p.name === 'simple-flow');
+			const nodesMap = new NodesMap(pipeline);
+			nodesMap.getAllNodes().forEach(n=>expect(n.level).to.least(0))
+			expect(nodesMap.getNode('green').level).to.eql(0);
+			expect(nodesMap.getNode('yellow').level).to.eql(1);
+			expect(nodesMap.getNode('black').level).to.eql(2);
+			expect(nodesMap.getNode('white').level).to.eql(0);
+		})
+		it('_addLevels: should add levels to graph 2', () => {
+			const pipeline = pipelines.find(p => p.name === 'flow2');
+			const nodesMap = new NodesMap(pipeline);
+			nodesMap.getAllNodes().forEach(n=>expect(n.level).to.least(0))
+			expect(nodesMap.getNode('green').level).to.eql(0);
+			expect(nodesMap.getNode('yellow').level).to.eql(1);
+			expect(nodesMap.getNode('black').level).to.eql(2);
+
+		})
+		it('_addLevels: should add levels to graph 3', () => {
+			const pipeline = pipelines.find(p => p.name === 'simple-wait-batch');
+			const nodesMap = new NodesMap(pipeline);
+			nodesMap.getAllNodes().forEach(n=>expect(n.level).to.least(0))
+			expect(nodesMap.getNode('green').level).to.eql(0);
+			expect(nodesMap.getNode('yellow').level).to.eql(0);
+			expect(nodesMap.getNode('black').level).to.eql(1);
+
+		})
+		it('_addLevels: should add levels to graph 4', () => {
+			const pipeline = pipelines.find(p => p.name === 'vertical');
+			const nodesMap = new NodesMap(pipeline);
+			nodesMap.getAllNodes().forEach(n=>expect(n.level).to.least(0))
+			expect(nodesMap.getNode('node1').level,'node1').to.eql(0);
+			expect(nodesMap.getNode('node2').level,'node2').to.eql(0);
+			expect(nodesMap.getNode('node3').level,'node3').to.eql(0);
+			expect(nodesMap.getNode('node4').level,'node4').to.eql(0);
+			expect(nodesMap.getNode('node6').level,'node6').to.eql(1);
+			expect(nodesMap.getNode('node7').level,'node7').to.eql(2);
+			expect(nodesMap.getNode('node8').level,'node8').to.eql(3);
+
+		})
 		it('should run simple-flow', () => {
 			const pipeline = pipelines.find(p => p.name === 'simple-flow');
 			const green = pipeline.nodes[0];
