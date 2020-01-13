@@ -578,5 +578,95 @@
                 ]
             }
         ]
+    },
+    {
+        "name": "vertical",
+        "description": "debug graph",
+        "nodes": [
+            {
+                "nodeName": "node1",
+                "algorithmName": "green-alg",
+                "input": [],
+                "metrics": {
+                    "tensorboard": true
+                }
+            },
+            {
+                "nodeName": "node2",
+                "algorithmName": "yellow-alg",
+                "input": [],
+                "metrics": {
+                    "tensorboard": true
+                }
+            },
+            {
+                "nodeName": "node3",
+                "algorithmName": "black-alg",
+                "input": [],
+                "metrics": {
+                    "tensorboard": true
+                }
+            },
+            {
+                "nodeName": "node4",
+                "algorithmName": "green-alg",
+                "input": [],
+                "metrics": {
+                    "tensorboard": true
+                }
+            },
+            {
+                "nodeName": "node6",
+                "algorithmName": "yellow-alg",
+                "input": [
+                    "@node1"
+                ],
+                "metrics": {
+                    "tensorboard": true
+                }
+            },
+            {
+                "nodeName": "node7",
+                "algorithmName": "black-alg",
+                "input": [
+                    "@node1",
+                    "@node3",
+                    "@node4",
+                    "@node2",
+                    "@node6"
+                ],
+                "metrics": {
+                    "tensorboard": true
+                }
+            },
+            {
+                "nodeName": "node8",
+                "algorithmName": "green-alg",
+                "input": [
+                    "@node2",
+                    "@node4",
+                    "@node6",
+                    "@node7"
+                ],
+                "metrics": {
+                    "tensorboard": true
+                }
+            }
+        ],
+        "flowInput": {},
+        "triggers": {
+            "cron": {
+                "pattern": "0 * * * *",
+                "enabled": false
+            },
+            "pipelines": []
+        },
+        "options": {
+            "batchTolerance": 100,
+            "concurrentPipelines": 10,
+            "progressVerbosityLevel": "info",
+            "ttl": 3600
+        },
+        "priority": 3
     }
 ]
