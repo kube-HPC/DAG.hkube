@@ -26,6 +26,18 @@ describe('NodesMap', () => {
 			const node = nodesMap.getNode(firstNode.nodeName);
 			expect(node.nodeName).to.equal(firstNode.nodeName);
 		});
+		it('should include node in results', () => {
+			const pipeline = pipelines.find(p => p.name === 'batch');
+			const firstNode = pipeline.nodes[0];
+			const nodesMap = new NodesMap(pipeline);
+			const node = nodesMap.getNode(firstNode.nodeName);
+			expect(node.includeInResults).to.be.true;
+			const resultNodes = nodesMap.pipelineResults();
+			expect(resultNodes).to.have.lengthOf(2);
+			expect(resultNodes[0].nodeName).to.eql('green')
+			expect(resultNodes[1].nodeName).to.eql('yellow')
+
+		});
 		it('getNode: should not get node by name', () => {
 			const pipeline = pipelines.find(p => p.name === 'simple-wait-batch');
 			const nodesMap = new NodesMap(pipeline);

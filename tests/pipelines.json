@@ -515,7 +515,8 @@
                 "algorithmName": "green-alg",
                 "input": [
                     "#@flowInput.files.links"
-                ]
+                ],
+                "includeInResults": true
             },
             {
                 "nodeName": "yellow",
