@@ -1,12 +1,17 @@
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
-const sinon = require('sinon');
 const clone = require('clone');
 const uuidv4 = require('uuid/v4');
 const NodesMap = require('../lib/nodes/nodes-map');
 const Node = require('../lib/nodes/node');
 const Batch = require('../lib/nodes/node-batch');
+const { Persistency } = require('../index');
 const pipelines = require('./pipelines.json');
+
+const redis = {
+	host: 'localhost',
+	port: 6379
+};
 const expect = chai.expect;
 chai.use(chaiAsPromised);
 
@@ -439,6 +444,18 @@ describe('NodesMap', () => {
 			expect(result).to.have.property('details');
 			expect(result.progress).to.equal(0);
 			expect(result.details).to.equal('0% completed, 4 creating');
+		});
+	});
+	describe('Persistency', () => {
+		it.skip('getNodeResults: should not able to get node results', async () => {
+			const nodesMap = new NodesMap(pipelines[0]);
+			const persistency = new Persistency({ connection: redis })
+			const jobId = `jobId-${uuidv4()}`;
+			const data = nodesMap.getJSONGraph();
+			const setRes = await persistency.setGraph({ jobId, data });
+			const getRes = await persistency.getGraph({ jobId, data });
+			expect(setRes).to.equal(result);
+			expect(getRes).to.equal(result);
 		});
 	});
 });
