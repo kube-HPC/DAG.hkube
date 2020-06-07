@@ -1,6 +1,6 @@
 {
   "name": "@hkube/dag",
-  "version": "1.0.19",
+  "version": "2.0.0",
   "description": "handle the pipeline flow",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
   "author": "Hkube",
   "license": "MIT",
   "dependencies": {
-    "@hkube/parsers": "^1.0.20",
+    "@hkube/parsers": "^2.0.0",
     "@hkube/redis-utils": "^1.0.3",
     "deep-extend": "^0.6.0",
     "graphlib": "^2.1.7",
