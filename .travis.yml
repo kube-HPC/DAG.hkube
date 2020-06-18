@@ -9,14 +9,11 @@ branches:
     - master
 install:
   - npm install
-# - npm install -g snyk
-# - snyk test
 cache:
   directories:
     - node_modules
 script:
   - npm run lint && npm run test:cov
-# Send coverage data to Coveralls
 after_script: "npm run coverage"
 after_success:
   - |
