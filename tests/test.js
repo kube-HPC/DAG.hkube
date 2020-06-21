@@ -1,7 +1,7 @@
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const clone = require('clone');
-const uuidv4 = require('uuid/v4');
+const uuidv4 = require('uuid').v4;
 const NodesMap = require('../lib/nodes/nodes-map');
 const Node = require('../lib/nodes/node');
 const Batch = require('../lib/nodes/node-batch');
@@ -290,7 +290,6 @@ describe('NodesMap', () => {
 				});
 			}
 		});
-
 		it('should update algorithm execution', () => {
 			const pipeline = pipelines.find(p => p.name === 'one-node');
 			const node = pipeline.nodes[0];
