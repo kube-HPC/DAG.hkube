@@ -18,10 +18,10 @@
   "dependencies": {
     "@hkube/parsers": "^2.0.5",
     "@hkube/redis-utils": "^1.0.3",
+    "@hkube/uid": "^1.0.4",
     "graphlib": "^2.1.7",
     "lodash.groupby": "^4.6.0",
-    "lodash.merge": "^4.6.1",
-    "uuid": "^8.1.0"
+    "lodash.merge": "^4.6.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
