@@ -1,7 +1,7 @@
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const clone = require('clone');
-const uuidv4 = require('uuid').v4;
+const { uuid: uuidv4 } = require('@hkube/uid');
 const NodesMap = require('../lib/nodes/nodes-map');
 const Node = require('../lib/nodes/node');
 const Batch = require('../lib/nodes/node-batch');
