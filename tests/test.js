@@ -21,7 +21,7 @@ describe('NodesMap', () => {
 			const pipeline = pipelines.find(p => p.name === 'simple-wait-batch');
 			const firstNode = pipeline.nodes[0];
 			const nodesMap = new NodesMap(pipeline);
-			const entryNodes = nodesMap.findEntryNodes();
+			const entryNodes = nodesMap.getSources();
 			expect(entryNodes[0]).to.equal(firstNode.nodeName);
 		});
 		it('getNode: should get node by name', () => {
