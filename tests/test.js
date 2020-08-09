@@ -435,15 +435,6 @@ describe('NodesMap', () => {
 			const result = nodesMap.pipelineResults();
 			expect(result).to.have.lengthOf(2);
 		});
-		it('should calc progress', () => {
-			const pipeline = clone(pipelines[0]);
-			const nodesMap = new NodesMap(pipeline);
-			const result = nodesMap.calcProgress();
-			expect(result).to.have.property('progress');
-			expect(result).to.have.property('details');
-			expect(result.progress).to.equal(0);
-			expect(result.details).to.equal('0% completed, 4 creating');
-		});
 	});
 	describe('Persistency', () => {
 		it.skip('getNodeResults: should not able to get node results', async () => {
