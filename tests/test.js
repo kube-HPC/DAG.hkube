@@ -315,6 +315,48 @@ describe('NodesMap', () => {
 			expect(exec2.status).to.equal(execution2.status);
 		});
 	});
+	describe('Edges', () => {
+		it('should getEdge', () => {
+			const pipeline = pipelines.find(p => p.name === 'simple-flow');
+			const n1 = pipeline.nodes[0].nodeName;
+			const n2 = pipeline.nodes[1].nodeName;
+			const nodesMap = new NodesMap(pipeline);
+			const edge = nodesMap.getEdge(n1, n2);
+			expect(edge).to.have.property('edges');
+		});
+		it('should setEdge', () => {
+			const pipeline = pipelines.find(p => p.name === 'simple-flow');
+			const n1 = pipeline.nodes[0].nodeName;
+			const n2 = pipeline.nodes[1].nodeName;
+			const nodesMap = new NodesMap(pipeline);
+			nodesMap.setEdge(n1, n2, { prop: 5 });
+			const edge = nodesMap.getEdge(n1, n2)
+			expect(edge).to.have.property('edges');
+			expect(edge).to.have.property('prop');
+		});
+		it('should getEdgeTypes', () => {
+			const pipeline = pipelines.find(p => p.name === 'simple-flow');
+			const n1 = pipeline.nodes[0].nodeName;
+			const n2 = pipeline.nodes[1].nodeName;
+			const nodesMap = new NodesMap(pipeline);
+			const edge = nodesMap.getEdgeTypes(n1, n2);
+			expect(edge).to.have.lengthOf(1);
+		});
+		it('should getEdges', () => {
+			const pipeline = pipelines.find(p => p.name === 'simple-flow');
+			const nodesMap = new NodesMap(pipeline);
+			const n1 = pipeline.nodes[0].nodeName;
+			const n2 = pipeline.nodes[1].nodeName;
+			const n3 = pipeline.nodes[2].nodeName;
+			nodesMap.setEdge(n1, n2, { prop: 5 });
+			nodesMap.setEdge(n2, n3, { prop: 6 });
+			const edges = nodesMap.getEdges();
+			expect(edges[0].value).to.have.property('edges');
+			expect(edges[0].value).to.have.property('prop');
+			expect(edges[1].value).to.have.property('edges');
+			expect(edges[1].value).to.have.property('prop');
+		});
+	});
 	describe('State', () => {
 		it('getNodeResults: should not able to get node results', () => {
 			const nodesMap = new NodesMap(pipelines[0]);
