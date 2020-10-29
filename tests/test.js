@@ -331,8 +331,18 @@ describe('NodesMap', () => {
 			const nodesMap = new NodesMap(pipeline);
 			nodesMap.setEdge(n1, n2, { prop: 5 });
 			const edge = nodesMap.getEdge(n1, n2)
-			expect(edge).to.have.property('edges');
 			expect(edge).to.have.property('prop');
+			expect(edge).to.not.have.property('edges');
+		});
+		it('should updateEdge', () => {
+			const pipeline = pipelines.find(p => p.name === 'simple-flow');
+			const n1 = pipeline.nodes[0].nodeName;
+			const n2 = pipeline.nodes[1].nodeName;
+			const nodesMap = new NodesMap(pipeline);
+			nodesMap.updateEdge(n1, n2, { prop: 5 });
+			const edge = nodesMap.getEdge(n1, n2)
+			expect(edge).to.have.property('prop');
+			expect(edge).to.have.property('edges');
 		});
 		it('should getEdgeTypes', () => {
 			const pipeline = pipelines.find(p => p.name === 'simple-flow');
@@ -351,9 +361,7 @@ describe('NodesMap', () => {
 			nodesMap.setEdge(n1, n2, { prop: 5 });
 			nodesMap.setEdge(n2, n3, { prop: 6 });
 			const edges = nodesMap.getEdges();
-			expect(edges[0].value).to.have.property('edges');
 			expect(edges[0].value).to.have.property('prop');
-			expect(edges[1].value).to.have.property('edges');
 			expect(edges[1].value).to.have.property('prop');
 		});
 	});
