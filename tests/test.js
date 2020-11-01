@@ -17,14 +17,14 @@ chai.use(chaiAsPromised);
 
 describe('NodesMap', () => {
 	describe('Graph', () => {
-		it('findEntryNodes: should find entry nodes', () => {
+		it('should find entry nodes', () => {
 			const pipeline = pipelines.find(p => p.name === 'simple-wait-batch');
 			const firstNode = pipeline.nodes[0];
 			const nodesMap = new NodesMap(pipeline);
 			const entryNodes = nodesMap.getSources();
 			expect(entryNodes[0]).to.equal(firstNode.nodeName);
 		});
-		it('getNode: should get node by name', () => {
+		it('should get node by name', () => {
 			const pipeline = pipelines.find(p => p.name === 'simple-wait-batch');
 			const firstNode = pipeline.nodes[0];
 			const nodesMap = new NodesMap(pipeline);
@@ -43,52 +43,12 @@ describe('NodesMap', () => {
 			expect(resultNodes[1].nodeName).to.eql('yellow')
 
 		});
-		it('getNode: should not get node by name', () => {
+		it('should not get node by name', () => {
 			const pipeline = pipelines.find(p => p.name === 'simple-wait-batch');
 			const nodesMap = new NodesMap(pipeline);
 			const node = nodesMap.getNode('not_exists');
 			expect(node).to.be.undefined;
 		});
-		it('_addLevels: should add levels to graph 1', () => {
-			const pipeline = pipelines.find(p => p.name === 'simple-flow');
-			const nodesMap = new NodesMap(pipeline);
-			nodesMap.getAllNodes().forEach(n => expect(n.level).to.least(0))
-			expect(nodesMap.getNode('green').level).to.eql(0);
-			expect(nodesMap.getNode('yellow').level).to.eql(1);
-			expect(nodesMap.getNode('black').level).to.eql(2);
-			expect(nodesMap.getNode('white').level).to.eql(0);
-		})
-		it('_addLevels: should add levels to graph 2', () => {
-			const pipeline = pipelines.find(p => p.name === 'flow2');
-			const nodesMap = new NodesMap(pipeline);
-			nodesMap.getAllNodes().forEach(n => expect(n.level).to.least(0))
-			expect(nodesMap.getNode('green').level).to.eql(0);
-			expect(nodesMap.getNode('yellow').level).to.eql(1);
-			expect(nodesMap.getNode('black').level).to.eql(2);
-
-		})
-		it('_addLevels: should add levels to graph 3', () => {
-			const pipeline = pipelines.find(p => p.name === 'simple-wait-batch');
-			const nodesMap = new NodesMap(pipeline);
-			nodesMap.getAllNodes().forEach(n => expect(n.level).to.least(0))
-			expect(nodesMap.getNode('green').level).to.eql(0);
-			expect(nodesMap.getNode('yellow').level).to.eql(0);
-			expect(nodesMap.getNode('black').level).to.eql(1);
-
-		})
-		it('_addLevels: should add levels to graph 4', () => {
-			const pipeline = pipelines.find(p => p.name === 'vertical');
-			const nodesMap = new NodesMap(pipeline);
-			nodesMap.getAllNodes().forEach(n => expect(n.level).to.least(0))
-			expect(nodesMap.getNode('node1').level, 'node1').to.eql(0);
-			expect(nodesMap.getNode('node2').level, 'node2').to.eql(0);
-			expect(nodesMap.getNode('node3').level, 'node3').to.eql(0);
-			expect(nodesMap.getNode('node4').level, 'node4').to.eql(0);
-			expect(nodesMap.getNode('node6').level, 'node6').to.eql(1);
-			expect(nodesMap.getNode('node7').level, 'node7').to.eql(2);
-			expect(nodesMap.getNode('node8').level, 'node8').to.eql(3);
-
-		})
 		it('should run simple-flow', () => {
 			const pipeline = pipelines.find(p => p.name === 'simple-flow');
 			const green = pipeline.nodes[0];
@@ -315,14 +275,64 @@ describe('NodesMap', () => {
 			expect(exec2.status).to.equal(execution2.status);
 		});
 	});
+	describe('addLevels', () => {
+		it('should add levels to graph 1', () => {
+			const pipeline = pipelines.find(p => p.name === 'simple-flow');
+			const nodesMap = new NodesMap(pipeline);
+			nodesMap.getAllNodes().forEach(n => expect(n.level).to.least(0))
+			expect(nodesMap.getNode('green').level).to.eql(0);
+			expect(nodesMap.getNode('yellow').level).to.eql(1);
+			expect(nodesMap.getNode('black').level).to.eql(2);
+			expect(nodesMap.getNode('white').level).to.eql(0);
+		});
+		it('should add levels to graph 2', () => {
+			const pipeline = pipelines.find(p => p.name === 'flow2');
+			const nodesMap = new NodesMap(pipeline);
+			nodesMap.getAllNodes().forEach(n => expect(n.level).to.least(0))
+			expect(nodesMap.getNode('green').level).to.eql(0);
+			expect(nodesMap.getNode('yellow').level).to.eql(1);
+			expect(nodesMap.getNode('black').level).to.eql(2);
+		});
+		it('should add levels to graph 3', () => {
+			const pipeline = pipelines.find(p => p.name === 'simple-wait-batch');
+			const nodesMap = new NodesMap(pipeline);
+			nodesMap.getAllNodes().forEach(n => expect(n.level).to.least(0))
+			expect(nodesMap.getNode('green').level).to.eql(0);
+			expect(nodesMap.getNode('yellow').level).to.eql(0);
+			expect(nodesMap.getNode('black').level).to.eql(1);
+		});
+		it('should add levels to graph 4', () => {
+			const pipeline = pipelines.find(p => p.name === 'vertical');
+			const nodesMap = new NodesMap(pipeline);
+			nodesMap.getAllNodes().forEach(n => expect(n.level).to.least(0))
+			expect(nodesMap.getNode('node1').level, 'node1').to.eql(0);
+			expect(nodesMap.getNode('node2').level, 'node2').to.eql(0);
+			expect(nodesMap.getNode('node3').level, 'node3').to.eql(0);
+			expect(nodesMap.getNode('node4').level, 'node4').to.eql(0);
+			expect(nodesMap.getNode('node6').level, 'node6').to.eql(1);
+			expect(nodesMap.getNode('node7').level, 'node7').to.eql(2);
+			expect(nodesMap.getNode('node8').level, 'node8').to.eql(3);
+		});
+	});
 	describe('Edges', () => {
+		it('should create edge', () => {
+			const pipeline = pipelines.find(p => p.name === 'simple-flow');
+			const n1 = pipeline.nodes[0].nodeName;
+			const n2 = pipeline.nodes[3].nodeName;
+			const dag1 = new NodesMap(pipeline);
+			const edge1 = dag1.getEdge(n1, n2);
+			const dag2 = new NodesMap({ ...pipeline, edges: [{ source: n1, target: n2 }] });
+			const edge2 = dag2.getEdge(n1, n2);
+			expect(edge1).to.be.undefined;
+			expect(edge2).to.have.property('types');
+		});
 		it('should getEdge', () => {
 			const pipeline = pipelines.find(p => p.name === 'simple-flow');
 			const n1 = pipeline.nodes[0].nodeName;
 			const n2 = pipeline.nodes[1].nodeName;
 			const nodesMap = new NodesMap(pipeline);
 			const edge = nodesMap.getEdge(n1, n2);
-			expect(edge).to.have.property('edges');
+			expect(edge).to.have.property('types');
 		});
 		it('should setEdge', () => {
 			const pipeline = pipelines.find(p => p.name === 'simple-flow');
@@ -332,7 +342,7 @@ describe('NodesMap', () => {
 			nodesMap.setEdge(n1, n2, { prop: 5 });
 			const edge = nodesMap.getEdge(n1, n2)
 			expect(edge).to.have.property('prop');
-			expect(edge).to.not.have.property('edges');
+			expect(edge).to.not.have.property('types');
 		});
 		it('should updateEdge', () => {
 			const pipeline = pipelines.find(p => p.name === 'simple-flow');
@@ -342,15 +352,23 @@ describe('NodesMap', () => {
 			nodesMap.updateEdge(n1, n2, { prop: 5 });
 			const edge = nodesMap.getEdge(n1, n2)
 			expect(edge).to.have.property('prop');
-			expect(edge).to.have.property('edges');
+			expect(edge).to.have.property('types');
 		});
-		it('should getEdgeTypes', () => {
+		it('should get one edge types', () => {
 			const pipeline = pipelines.find(p => p.name === 'simple-flow');
 			const n1 = pipeline.nodes[0].nodeName;
 			const n2 = pipeline.nodes[1].nodeName;
 			const nodesMap = new NodesMap(pipeline);
-			const edge = nodesMap.getEdgeTypes(n1, n2);
-			expect(edge).to.have.lengthOf(1);
+			const types = nodesMap.getEdgeTypes(n1, n2);
+			expect(types).to.have.lengthOf(1);
+		});
+		it('should get empty edge types', () => {
+			const pipeline = pipelines.find(p => p.name === 'simple-flow');
+			const n1 = pipeline.nodes[0].nodeName;
+			const n2 = pipeline.nodes[3].nodeName;
+			const nodesMap = new NodesMap(pipeline);
+			const types = nodesMap.getEdgeTypes(n1, n2);
+			expect(types).to.have.lengthOf(0);
 		});
 		it('should getEdges', () => {
 			const pipeline = pipelines.find(p => p.name === 'simple-flow');
@@ -487,15 +505,15 @@ describe('NodesMap', () => {
 		});
 	});
 	describe('Persistency', () => {
-		it.skip('getNodeResults: should not able to get node results', async () => {
+		it('getNodeResults: should not able to get node results', async () => {
 			const nodesMap = new NodesMap(pipelines[0]);
 			const persistency = new Persistency({ connection: redis })
 			const jobId = `jobId-${uuidv4()}`;
 			const data = nodesMap.getJSONGraph();
-			const setRes = await persistency.setGraph({ jobId, data });
-			const getRes = await persistency.getGraph({ jobId, data });
-			expect(setRes).to.equal(result);
-			expect(getRes).to.equal(result);
+			const json = JSON.stringify(data);
+			await persistency.setGraph({ jobId, data });
+			const getRes = await persistency.getGraph({ jobId });
+			expect(getRes).to.eql(json);
 		});
 	});
 });
