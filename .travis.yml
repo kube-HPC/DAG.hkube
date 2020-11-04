@@ -4,6 +4,7 @@ node_js:
   - "14"
 services:
   - docker
+  - redis
 branches:
   only:
     - master
