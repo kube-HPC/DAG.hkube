@@ -276,10 +276,20 @@ describe('NodesMap', () => {
         });
     });
     describe('addLevels', () => {
+        it('should add levels to cycle graph', () => {
+            const pipeline = pipelines.find(p => p.name === 'cycle-flow');
+            const nodesMap = new NodesMap(pipeline);
+            const nodes = nodesMap.getAllNodes();
+            nodes.forEach(n => expect(n.level).to.least(0))
+            expect(nodesMap.getNode('A').level).to.eql(0);
+            expect(nodesMap.getNode('B').level).to.eql(1);
+            expect(nodesMap.getNode('C').level).to.eql(1);
+        });
         it('should add levels to graph 1', () => {
             const pipeline = pipelines.find(p => p.name === 'simple-flow');
             const nodesMap = new NodesMap(pipeline);
-            nodesMap.getAllNodes().forEach(n => expect(n.level).to.least(0))
+            const nodes = nodesMap.getAllNodes();
+            nodes.forEach(n => expect(n.level).to.least(0))
             expect(nodesMap.getNode('green').level).to.eql(0);
             expect(nodesMap.getNode('yellow').level).to.eql(1);
             expect(nodesMap.getNode('black').level).to.eql(2);
@@ -288,10 +298,11 @@ describe('NodesMap', () => {
         it('should add levels to graph 2', () => {
             const pipeline = pipelines.find(p => p.name === 'flow2');
             const nodesMap = new NodesMap(pipeline);
-            nodesMap.getAllNodes().forEach(n => expect(n.level).to.least(0))
+            const nodes = nodesMap.getAllNodes();
+            nodes.forEach(n => expect(n.level).to.least(0))
             expect(nodesMap.getNode('green').level).to.eql(0);
             expect(nodesMap.getNode('yellow').level).to.eql(1);
-            expect(nodesMap.getNode('black').level).to.eql(2);
+            expect(nodesMap.getNode('black').level).to.eql(1);
         });
         it('should add levels to graph 3', () => {
             const pipeline = pipelines.find(p => p.name === 'simple-wait-batch');
@@ -301,7 +312,7 @@ describe('NodesMap', () => {
             expect(nodesMap.getNode('yellow').level).to.eql(0);
             expect(nodesMap.getNode('black').level).to.eql(1);
         });
-        it('should add levels to graph 4', () => {
+        it.only('should add levels to graph 4', () => {
             const pipeline = pipelines.find(p => p.name === 'vertical');
             const nodesMap = new NodesMap(pipeline);
             nodesMap.getAllNodes().forEach(n => expect(n.level).to.least(0))
@@ -310,8 +321,8 @@ describe('NodesMap', () => {
             expect(nodesMap.getNode('node3').level, 'node3').to.eql(0);
             expect(nodesMap.getNode('node4').level, 'node4').to.eql(0);
             expect(nodesMap.getNode('node6').level, 'node6').to.eql(1);
-            expect(nodesMap.getNode('node7').level, 'node7').to.eql(2);
-            expect(nodesMap.getNode('node8').level, 'node8').to.eql(3);
+            expect(nodesMap.getNode('node7').level, 'node7').to.eql(1);
+            expect(nodesMap.getNode('node8').level, 'node8').to.eql(2);
         });
     });
     describe('Edges', () => {

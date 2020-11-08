@@ -33,6 +33,34 @@
         ]
     },
     {
+        "name": "cycle-flow",
+        "nodes": [
+            {
+                "nodeName": "A",
+                "algorithmName": "green-alg",
+                "input": [
+                    "data"
+                ]
+            },
+            {
+                "nodeName": "B",
+                "algorithmName": "yellow-alg",
+                "input": [
+                    "@A",
+                    "@C"
+                ]
+            },
+            {
+                "nodeName": "C",
+                "algorithmName": "black-alg",
+                "input": [
+                    "@A",
+                    "@B"
+                ]
+            }
+        ]
+    },
+    {
         "name": "flow2",
         "nodes": [
             {
