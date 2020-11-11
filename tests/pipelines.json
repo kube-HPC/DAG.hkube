@@ -34,13 +34,15 @@
     },
     {
         "name": "cycle-flow",
+        "kind": "stream",
         "nodes": [
             {
                 "nodeName": "A",
                 "algorithmName": "green-alg",
                 "input": [
                     "data"
-                ]
+                ],
+                "stateType": "stateful"
             },
             {
                 "nodeName": "B",
