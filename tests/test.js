@@ -1,5 +1,4 @@
-const chai = require('chai');
-const chaiAsPromised = require('chai-as-promised');
+const { expect } = require('chai');
 const clone = require('clone');
 const { uuid: uuidv4 } = require('@hkube/uid');
 const NodesMap = require('../lib/nodes/nodes-map');
@@ -12,8 +11,6 @@ const redis = {
     host: 'localhost',
     port: 6379
 };
-const expect = chai.expect;
-chai.use(chaiAsPromised);
 
 describe('NodesMap', () => {
     describe('Validation', () => {

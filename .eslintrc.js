@@ -1,16 +1,18 @@
 module.exports = {
-  extends: ["airbnb-base"],
-  env: {
-    es6: true,
-    node: true,
-    mocha: true
+  "extends": ["airbnb-base"],
+  "env": {
+    "es6": true,
+    "node": true,
+    "mocha": true
   },
-  plugins: ["chai-friendly"],
-  parserOptions: {
-    sourceType: "module",
-    ecmaVersion: 2018
+  "plugins": [
+    "chai-friendly"
+  ],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2020
   },
-  rules: {
+  "rules": {
     "no-param-reassign": "error",
     "prefer-template": "error",
     "no-trailing-spaces": "error",
@@ -19,7 +21,7 @@ module.exports = {
     "object-curly-spacing": "error",
     "no-var": "error",
     "import/newline-after-import": "off",
-    "max-len": ["error", 200],
+    "max-len": ["error", 220],
     "brace-style": ["error", "stroustrup"],
     "indent": ["warn", 4, { "SwitchCase": 1 }],
     "comma-dangle": "off",
@@ -29,6 +31,7 @@ module.exports = {
     "newline-per-chained-call": "off",
     "arrow-body-style": "off",
     "class-methods-use-this": "off",
-    "no-unused-expressions": 0
+    "no-unused-expressions": 0,
+    "arrow-parens": "off"
   }
 };
