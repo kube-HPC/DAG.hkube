@@ -476,13 +476,13 @@ describe('NodesMap', () => {
             expect(edge).to.have.property('prop');
             expect(edge).to.have.property('types');
         });
-        it('should get one edge types', () => {
+        it('should get edge types', () => {
             const pipeline = pipelines.find(p => p.name === 'simple-flow');
             const n1 = pipeline.nodes[0].nodeName;
             const n2 = pipeline.nodes[1].nodeName;
             const nodesMap = new NodesMap(pipeline);
             const types = nodesMap.getEdgeTypes(n1, n2);
-            expect(types).to.have.lengthOf(1);
+            expect(types).to.have.lengthOf(2);
         });
         it('should get empty edge types', () => {
             const pipeline = pipelines.find(p => p.name === 'simple-flow');
