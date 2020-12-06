@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI-PR
+name: CI
 
 # Controls when the action will run.
 on:
@@ -54,6 +54,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: setup git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
       - name: version
         run: |
           git checkout -f -b version-branch
