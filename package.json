@@ -13,6 +13,12 @@
   "keywords": [
     "hkube"
   ],
+  "pre-commit": {
+    "run": [
+      "lint",
+      "test"
+    ]
+  },
   "author": "Hkube",
   "license": "MIT",
   "dependencies": {
@@ -33,6 +39,7 @@
     "eslint-plugin-chai-friendly": "^0.5.0",
     "eslint-plugin-import": "^2.20.2",
     "mocha": "^6.0.2",
-    "nyc": "^14.1.1"
+    "nyc": "^14.1.1",
+    "pre-commit": "^1.2.2"
   }
 }
