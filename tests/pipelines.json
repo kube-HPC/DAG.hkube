@@ -47,18 +47,30 @@
             {
                 "nodeName": "B",
                 "algorithmName": "yellow-alg",
-                "input": [
-                    "@A",
-                    "@C"
-                ]
+                "input": []
             },
             {
                 "nodeName": "C",
                 "algorithmName": "black-alg",
-                "input": [
-                    "@A",
-                    "@B"
-                ]
+                "input": []
+            }
+        ],
+        "edges": [
+            {
+                "source": "A",
+                "target": "B"
+            },
+            {
+                "source": "A",
+                "target": "C"
+            },
+            {
+                "source": "C",
+                "target": "B"
+            },
+            {
+                "source": "B",
+                "target": "C"
             }
         ]
     },
