@@ -131,7 +131,7 @@ describe('NodesMap', () => {
             const nodesMap = new NodesMap(pipeline);
             expect(nodesMap).to.exist;
         });
-        it('should find entry nodes', () => {
+        it('should throw @ sign is not allowed', () => {
             const pipeline = pipelines.find(p => p.name === 'relations-stream');
             expect(() => new NodesMap(pipeline)).to.throw('the "@" sign is not allowed in "stream" pipeline, please use the "streaming.flows" property instead');
         });
