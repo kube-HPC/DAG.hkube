@@ -347,5 +347,44 @@
                 }
             }
         ]
+    },
+    {
+        "name": "dataSource-stream",
+        "kind": "stream",
+        "nodes": [
+            {
+                "nodeName": "A",
+                "kind": "dataSource",
+                "input": [],
+                "dataSource": {
+                    "name": "ds"
+                }
+            },
+            {
+                "nodeName": "B",
+                "algorithmName": "green-alg",
+                "input": [
+                    "@A"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "relations-stream",
+        "kind": "stream",
+        "nodes": [
+            {
+                "nodeName": "A",
+                "algorithmName": "green-alg",
+                "input": []
+            },
+            {
+                "nodeName": "B",
+                "algorithmName": "green-alg",
+                "input": [
+                    "@A"
+                ]
+            }
+        ]
     }
 ]

@@ -126,6 +126,15 @@ describe('NodesMap', () => {
             }
             expect(() => new NodesMap(pipeline, { checkFlowInput: true })).to.throw('cyclic nodes are not allowed on batch pipeline');
         });
+        it('should build graph', () => {
+            const pipeline = pipelines.find(p => p.name === 'dataSource-stream');
+            const nodesMap = new NodesMap(pipeline);
+            expect(nodesMap).to.exist;
+        });
+        it('should throw @ sign is not allowed', () => {
+            const pipeline = pipelines.find(p => p.name === 'relations-stream');
+            expect(() => new NodesMap(pipeline)).to.throw('the "@" sign is not allowed in "stream" pipeline, please use the "streaming.flows" property instead');
+        });
     });
     describe('Graph', () => {
         it('should find entry nodes', () => {
