@@ -674,7 +674,7 @@ describe('NodesMap', () => {
             await persistency.init({ connection: dbConfig })
             const jobId = `jobId-${uuidv4()}`;
             const getRes = await persistency.getGraph({ jobId });
-            expect(getRes).to.eql({});
+            expect(getRes).to.not.exist;
         });
     });
 });
