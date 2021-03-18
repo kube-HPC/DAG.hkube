@@ -7,10 +7,19 @@ const Batch = require('../lib/nodes/node-batch');
 const { Persistency } = require('../index');
 const pipelines = require('./pipelines.json');
 
-const redis = {
-    host: 'localhost',
-    port: 6379
+const dbConfig = {
+    provider: 'mongo',
+    mongo: {
+        auth: {
+            user: 'tester',
+            password: 'password',
+        },
+        host: 'localhost',
+        port: 27017,
+        dbName: 'hkube',
+    }
 };
+
 
 describe('NodesMap', () => {
     describe('Validation', () => {
@@ -636,15 +645,36 @@ describe('NodesMap', () => {
         });
     });
     describe('Persistency', () => {
-        it('getNodeResults: should not able to get node results', async () => {
+        it('should save and get graph', async () => {
             const nodesMap = new NodesMap(pipelines[0]);
-            const persistency = new Persistency({ connection: redis })
+            const persistency = new Persistency()
+            await persistency.init({ connection: dbConfig })
             const jobId = `jobId-${uuidv4()}`;
             const data = nodesMap.getJSONGraph();
-            const json = JSON.stringify(data);
             await persistency.setGraph({ jobId, data });
             const getRes = await persistency.getGraph({ jobId });
-            expect(getRes).to.eql(json);
+            expect(getRes).to.eql(data);
+        });
+
+        it('should update current graph', async () => {
+            const nodesMap = new NodesMap(pipelines[0]);
+            const persistency = new Persistency()
+            await persistency.init({ connection: dbConfig })
+            const jobId = `jobId-${uuidv4()}`;
+            const data = nodesMap.getJSONGraph();
+            await persistency._adapter._db.jobs.create({ jobId, graph: data })
+            const updated = { options: {}, nodes: [], edges: [] };
+            await persistency.setGraph({ jobId, data: updated });
+            const getRes = await persistency.getGraph({ jobId });
+            expect(getRes).to.eql(updated);
+        });
+
+        it('should fail to get non-exist graph', async () => {
+            const persistency = new Persistency()
+            await persistency.init({ connection: dbConfig })
+            const jobId = `jobId-${uuidv4()}`;
+            const getRes = await persistency.getGraph({ jobId });
+            expect(getRes).to.eql({});
         });
     });
 });
