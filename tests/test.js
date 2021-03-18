@@ -650,7 +650,7 @@ describe('NodesMap', () => {
             const persistency = new Persistency()
             await persistency.init({ connection: dbConfig })
             const jobId = `jobId-${uuidv4()}`;
-            const data = nodesMap.getJSONGraph();
+            const data = { ...nodesMap.getJSONGraph(), jobId, timestamp: Date.now() };
             await persistency.setGraph({ jobId, data });
             const getRes = await persistency.getGraph({ jobId });
             expect(getRes).to.eql(data);
@@ -661,9 +661,9 @@ describe('NodesMap', () => {
             const persistency = new Persistency()
             await persistency.init({ connection: dbConfig })
             const jobId = `jobId-${uuidv4()}`;
-            const data = nodesMap.getJSONGraph();
+            const data = { ...nodesMap.getJSONGraph(), jobId, timestamp: Date.now() };
             await persistency._adapter._db.jobs.create({ jobId, graph: data })
-            const updated = { options: {}, nodes: [], edges: [] };
+            const updated = { options: {}, nodes: [], edges: [], jobId, timestamp: Date.now() };
             await persistency.setGraph({ jobId, data: updated });
             const getRes = await persistency.getGraph({ jobId });
             expect(getRes).to.eql(updated);
