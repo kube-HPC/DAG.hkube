@@ -656,6 +656,17 @@ describe('NodesMap', () => {
             expect(getRes).to.eql(data);
         });
 
+        it('should return null if no graph', async () => {
+            const nodesMap = new NodesMap(pipelines[0]);
+            const persistency = new Persistency()
+            await persistency.init({ connection: dbConfig })
+            const jobId = `jobId-${uuidv4()}`;
+            const data = { ...nodesMap.getJSONGraph(), jobId, timestamp: Date.now() };
+            await persistency.setGraph({ jobId, data: null });
+            const getRes = await persistency.getGraph({ jobId });
+            expect(getRes).to.not.exist;
+        });
+
         it('should update current graph', async () => {
             const nodesMap = new NodesMap(pipelines[0]);
             const persistency = new Persistency()
