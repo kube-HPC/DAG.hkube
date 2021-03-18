@@ -23,8 +23,8 @@
   "license": "MIT",
   "dependencies": {
     "@hkube/consts": "^1.0.32",
+    "@hkube/db": "^1.0.27",
     "@hkube/parsers": "^2.1.5",
-    "@hkube/redis-utils": "^1.0.3",
     "@hkube/uid": "^1.0.4",
     "graphlib": "^2.1.8",
     "lodash.groupby": "^4.6.0",
