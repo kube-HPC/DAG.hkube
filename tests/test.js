@@ -112,6 +112,7 @@ describe('NodesMap', () => {
                 kind: "stream",
                 nodes: [{
                     nodeName: "A",
+                    kind: "algorithm",
                     algorithmName: "green-alg",
                     input: ["data"]
                 }]
