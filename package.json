@@ -22,9 +22,9 @@
   "author": "Hkube",
   "license": "MIT",
   "dependencies": {
-    "@hkube/consts": "^1.0.34",
-    "@hkube/db": "^1.0.32",
-    "@hkube/parsers": "^2.1.5",
+    "@hkube/consts": "^1.0.35",
+    "@hkube/db": "^1.0.33",
+    "@hkube/parsers": "^2.1.7",
     "@hkube/uid": "^1.0.4",
     "graphlib": "^2.1.8",
     "lodash.groupby": "^4.6.0",

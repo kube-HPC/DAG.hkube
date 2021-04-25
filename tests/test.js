@@ -36,15 +36,27 @@ describe('NodesMap', () => {
             }
             expect(() => new NodesMap(pipeline)).to.throw('stateful node "A" is not allowed on batch pipeline');
         });
-        it('should throw missing algorithmName or pipelineName', () => {
+        it('should throw missing algorithmName', () => {
             const pipeline = {
                 name: "pipeline",
                 nodes: [{
                     nodeName: "A",
+                    kind: "algorithm",
                     input: ["data"],
                 }]
             }
-            expect(() => new NodesMap(pipeline)).to.throw('please provide algorithmName or pipelineName');
+            expect(() => new NodesMap(pipeline)).to.throw('please provide algorithmName');
+        });
+        it('should throw missing pipelineName', () => {
+            const pipeline = {
+                name: "pipeline",
+                nodes: [{
+                    nodeName: "A",
+                    kind: "pipeline",
+                    input: ["data"],
+                }]
+            }
+            expect(() => new NodesMap(pipeline)).to.throw('please provide pipelineName');
         });
         it('should throw found duplicate node', () => {
             const pipeline = {
