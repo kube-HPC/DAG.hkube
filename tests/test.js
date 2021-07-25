@@ -1,9 +1,9 @@
 const { expect } = require('chai');
 const clone = require('clone');
 const { uuid: uuidv4 } = require('@hkube/uid');
-const NodesMap = require('../lib/nodes/nodes-map');
-const Node = require('../lib/nodes/node');
-const Batch = require('../lib/nodes/node-batch');
+const NodesMap = require('../lib/graph/nodes-map');
+const Node = require('../lib/graph/node');
+const Batch = require('../lib/graph/node-batch');
 const { Persistency } = require('../index');
 const pipelines = require('./pipelines.json');
 
