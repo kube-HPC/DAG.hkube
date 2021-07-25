@@ -1,8 +1,8 @@
 const { expect } = require('chai');
 const { uuid: uuidv4 } = require('@hkube/uid');
-const NodesMap = require('../lib/graph/dag');
-const Node = require('../lib/graph/node');
-const Batch = require('../lib/graph/node-batch');
+const NodesMap = require('../lib/dag/dag');
+const Node = require('../lib/dag/node');
+const Batch = require('../lib/dag/node-batch');
 const pipelines = require('./pipelines.json');
 
 describe('Graph', () => {

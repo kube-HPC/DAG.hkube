@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const NodesMap = require('../lib/graph/dag');
+const NodesMap = require('../lib/dag/dag');
 const pipelines = require('./pipelines.json');
 
 describe('Levels', () => {

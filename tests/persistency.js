@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const { uuid: uuidv4 } = require('@hkube/uid');
-const NodesMap = require('../lib/graph/dag');
+const NodesMap = require('../lib/dag/dag');
 const { Persistency } = require('../index');
 const pipelines = require('./pipelines.json');
 
