@@ -25,7 +25,7 @@ describe('Validation', () => {
                 input: ["data"],
             }]
         }
-        expect(() => new NodesMap(pipeline)).to.throw('please provide algorithmName');
+        expect(() => new NodesMap(pipeline)).to.throw('please provide algorithm name');
     });
     it('should throw missing pipelineName', () => {
         const pipeline = {
@@ -36,7 +36,7 @@ describe('Validation', () => {
                 input: ["data"],
             }]
         }
-        expect(() => new NodesMap(pipeline)).to.throw('please provide pipelineName');
+        expect(() => new NodesMap(pipeline)).to.throw('please provide pipeline name');
     });
     it('should throw found duplicate node', () => {
         const pipeline = {
