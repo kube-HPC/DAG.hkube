@@ -87,6 +87,59 @@ describe('Validation', () => {
         }
         expect(() => new NodesMap(pipeline)).to.throw('node "A" is depend on node "NOOP" which is not exists');
     });
+    it('should throw node depend on an output node', () => {
+        const pipeline = {
+            name: "pipeline",
+            nodes: [{
+                nodeName: "A",
+                algorithmName: "green-alg",
+                input: [],
+            },
+            {
+                nodeName: "B",
+                algorithmName: "green-alg",
+                kind: "output",
+                input: ["@A"],
+            }, {
+                nodeName: "C",
+                algorithmName: "green-alg",
+                input: ["@B"],
+            }]
+        }
+        expect(() => new NodesMap(pipeline)).to.throw('node "B" should not depend on an output node');
+    });
+    it('should throw node output must depend', () => {
+        const pipeline = {
+            name: "pipeline",
+            nodes: [{
+                nodeName: "A",
+                algorithmName: "green-alg",
+                input: [],
+            },
+            {
+                nodeName: "B",
+                algorithmName: "green-alg",
+                kind: "output",
+                input: [],
+            }]
+        }
+        expect(() => new NodesMap(pipeline)).to.throw('output node "B" should have input nodes');
+    });
+    it('should throw no output node in streaming', () => {
+        const pipeline = {
+            name: "pipeline",
+            kind: "stream",
+            nodes: [{
+                nodeName: "A",
+                kind: "output",
+                algorithmName: "green-alg",
+                input: ["data"]
+            }]
+        }
+        expect(() => new NodesMap(pipeline)).to.throw('Node of type output can not be used in a streaming pipeline');
+    });
+
+
     it('should throw unable to find flowInput', () => {
         const pipeline = {
             name: "pipeline",
