@@ -1,6 +1,6 @@
 {
   "name": "@hkube/dag",
-  "version": "2.1.22",
+  "version": "2.1.23",
   "description": "handle the pipeline flow",
   "main": "index.js",
   "scripts": {
