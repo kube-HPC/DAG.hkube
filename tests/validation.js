@@ -106,7 +106,7 @@ describe('Validation', () => {
                 input: ["@B"],
             }]
         }
-        expect(() => new NodesMap(pipeline)).to.throw('node "B" should not depend on an output node');
+        expect(() => new NodesMap(pipeline)).to.throw('node "B" should not have child nodes');
     });
     it('should throw node output must depend', () => {
         const pipeline = {
@@ -123,7 +123,7 @@ describe('Validation', () => {
                 input: [],
             }]
         }
-        expect(() => new NodesMap(pipeline)).to.throw('output node "B" should have input nodes');
+        expect(() => new NodesMap(pipeline)).to.throw('node "B" should have parent nodes');
     });
     it('should throw no output node in streaming', () => {
         const pipeline = {
@@ -136,10 +136,8 @@ describe('Validation', () => {
                 input: ["data"]
             }]
         }
-        expect(() => new NodesMap(pipeline)).to.throw('Node of type output can not be used in a streaming pipeline');
+        expect(() => new NodesMap(pipeline)).to.throw('node "A" from kind output can not be used in a streaming pipeline');
     });
-
-
     it('should throw unable to find flowInput', () => {
         const pipeline = {
             name: "pipeline",
