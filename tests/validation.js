@@ -98,19 +98,6 @@ describe('Validation', () => {
         }
         expect(() => new NodesMap(pipeline, { checkFlowInput: true })).to.throw('unable to find flowInput.noop');
     });
-    it('should throw entry node stateless on stream pipeline', () => {
-        const pipeline = {
-            name: "pipeline",
-            kind: "stream",
-            nodes: [{
-                nodeName: "A",
-                kind: "algorithm",
-                algorithmName: "green-alg",
-                input: ["data"]
-            }]
-        }
-        expect(() => new NodesMap(pipeline, { checkFlowInput: true })).to.throw('entry node "A" cannot be stateless on stream pipeline');
-    });
     it('should throw pipeline has cyclic nodes', () => {
         const pipeline = {
             name: "pipeline",
