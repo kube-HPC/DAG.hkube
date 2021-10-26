@@ -3,19 +3,6 @@ const NodesMap = require('../lib/dag/dag');
 const pipelines = require('./pipelines.json');
 
 describe('Validation', () => {
-    it('should throw stateful node is not allowed on batch pipeline', () => {
-        const pipeline = {
-            name: "pipeline",
-            kind: "batch",
-            nodes: [{
-                nodeName: "A",
-                algorithmName: "green-alg",
-                input: ["data"],
-                stateType: "stateful"
-            }]
-        }
-        expect(() => new NodesMap(pipeline)).to.throw('stateful node "A" is not allowed on batch pipeline');
-    });
     it('should throw missing algorithmName', () => {
         const pipeline = {
             name: "pipeline",
