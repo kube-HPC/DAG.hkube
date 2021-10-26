@@ -25,7 +25,7 @@ describe('Validation', () => {
                 input: ["data"],
             }]
         }
-        expect(() => new NodesMap(pipeline)).to.throw('please provide algorithmName');
+        expect(() => new NodesMap(pipeline)).to.throw('please provide algorithm name');
     });
     it('should throw missing pipelineName', () => {
         const pipeline = {
@@ -36,7 +36,7 @@ describe('Validation', () => {
                 input: ["data"],
             }]
         }
-        expect(() => new NodesMap(pipeline)).to.throw('please provide pipelineName');
+        expect(() => new NodesMap(pipeline)).to.throw('please provide pipeline name');
     });
     it('should throw found duplicate node', () => {
         const pipeline = {
@@ -86,6 +86,57 @@ describe('Validation', () => {
             }]
         }
         expect(() => new NodesMap(pipeline)).to.throw('node "A" is depend on node "NOOP" which is not exists');
+    });
+    it('should throw node depend on an output node', () => {
+        const pipeline = {
+            name: "pipeline",
+            nodes: [{
+                nodeName: "A",
+                algorithmName: "green-alg",
+                input: [],
+            },
+            {
+                nodeName: "B",
+                algorithmName: "green-alg",
+                kind: "output",
+                input: ["@A"],
+            }, {
+                nodeName: "C",
+                algorithmName: "green-alg",
+                input: ["@B"],
+            }]
+        }
+        expect(() => new NodesMap(pipeline)).to.throw('node "B" should not have child nodes');
+    });
+    it('should throw node output must depend', () => {
+        const pipeline = {
+            name: "pipeline",
+            nodes: [{
+                nodeName: "A",
+                algorithmName: "green-alg",
+                input: [],
+            },
+            {
+                nodeName: "B",
+                algorithmName: "green-alg",
+                kind: "output",
+                input: [],
+            }]
+        }
+        expect(() => new NodesMap(pipeline)).to.throw('node "B" should have parent nodes');
+    });
+    it('should throw no output node in streaming', () => {
+        const pipeline = {
+            name: "pipeline",
+            kind: "stream",
+            nodes: [{
+                nodeName: "A",
+                kind: "output",
+                algorithmName: "green-alg",
+                input: ["data"]
+            }]
+        }
+        expect(() => new NodesMap(pipeline)).to.throw('node "A" from kind output can not be used in a streaming pipeline');
     });
     it('should throw unable to find flowInput', () => {
         const pipeline = {
