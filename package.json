@@ -23,7 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "@hkube/consts": "^1.0.37",
-    "@hkube/db": "^1.0.42",
+    "@hkube/db": "^1.0.47",
     "@hkube/parsers": "^2.1.7",
     "@hkube/uid": "^1.0.4",
     "graphlib": "^2.1.8",
